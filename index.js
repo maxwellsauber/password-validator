@@ -1,9 +1,10 @@
 const validatePassword = (password) => {
   const alphaChar = 'abcdefghijklmnopqrstuvwxyz' //add more for i18n
   const specialChar = '~!@#$%^&*()_+'
+  const numChar = '0123456789'
   
   return !(password.length < 8
-   || !hasNum(password)
+   || !hasChar(password, numChar.split(''))
    || !hasChar(password, alphaChar.toUpperCase().split(''))
    || !hasChar(password, alphaChar.split(''))
    || !hasChar(password, specialChar.split('')))
@@ -16,13 +17,4 @@ const hasChar = (password, characters) => {
     }
   }
 }
-
-const hasNum = (password) => {
-  for (var i = 0; i < password.length; i++) {
-    if (!isNaN(password.charAt(i))) {
-      return true
-    }
-  }
-}
-
 module.exports = validatePassword
