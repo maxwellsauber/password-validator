@@ -2,15 +2,14 @@ const validatePassword = (password) => {
   const alphaChar = 'abcdefghijklmnopqrstuvwxyz' //add more for i18n
   const specialChar = '~!@#$%^&*()_+'
   
-  if (password.length < 8) { return false }
-  if (!checkNum(password)) { return false }
-  if (!checkChar(password, alphaChar.toUpperCase().split(''))) { return false }
-  if (!checkChar(password, alphaChar.split(''))) { return false }
-  if (!checkChar(password, specialChar.split(''))) { return false }
-  return true
+  return !(password.length < 8
+   || !includesNum(password)
+   || !includesChar(password, alphaChar.toUpperCase().split(''))
+   || !includesChar(password, alphaChar.split(''))
+   || !includesChar(password, specialChar.split('')))
 }
 
-const checkChar = (password, characters) => {
+const includesChar = (password, characters) => {
   for (var i = 0; i < password.length; i++) {
     if (characters.includes(password.charAt(i))) {
       return true
@@ -18,7 +17,7 @@ const checkChar = (password, characters) => {
   }
 }
 
-const checkNum = (password) => {
+const includesNum = (password) => {
   for (var i = 0; i < password.length; i++) {
     if (!isNaN(password.charAt(i))) {
       return true
