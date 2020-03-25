@@ -2,12 +2,12 @@ const validatePassword = (password) => {
   const alphaChar = 'abcdefghijklmnopqrstuvwxyz' //add more for i18n
   const numChar = '0123456789'
   const specialChar = '~!@#$%^&*()_+,.?><[]{}|=-\\/'
-  
-  return !(password.length < 8
-   || !hasChar(password, alphaChar.toUpperCase().split(''))
-   || !hasChar(password, alphaChar.split(''))
-   || !hasChar(password, numChar.split(''))
-   || !hasChar(password, specialChar.split('')))
+
+  return password.length >= 8
+    && hasChar(password, alphaChar.toUpperCase().split(''))
+    && hasChar(password, alphaChar.split(''))
+    && hasChar(password, numChar.split(''))
+    && hasChar(password, specialChar.split(''))
 }
 
 const hasChar = (password, characters) => {
@@ -16,5 +16,6 @@ const hasChar = (password, characters) => {
       return true
     }
   }
+  return false
 }
 module.exports = validatePassword
